@@ -1,18 +1,25 @@
 <template>
-    <v-app id="inspire">
+  <section class="title">
+    <h1>Descripter.Ai</h1>
+    <p>Faça descrições performáticas de forma simples para seus produtos ou anúncios.</p>
+  </section>
 
-      <v-main>
-          <v-form>
-            <v-text-field label="Username" v-model="name" />
-            <v-text-field label="Email" v-model="email" />
-            <v-text-field label="Password" v-model="password" type="password" />
-            <v-btn @click="login">Register</v-btn>
-          </v-form>
-      </v-main>
-    </v-app>
-  </template>
+  <main id="login-form">
+    <section class="container-form">
+      <form class="form-home">
+        <label for="email">Email</label>
+        <input type="text" id="email" v-model="email" class="mb-3">
+        <label for="password">Password</label>
+        <input type="password" id="password" v-model="password" class="mb-3">
+        <button type="button" @click="login" class="ma-3">Register</button>
+        <span v-if="message"> {{ message }} </span>
+      </form>
+      <router-link to="/login">Logar</router-link>
+    </section>
+  </main>
+</template>
 
-  <script>
+<script>
 export default {
   data() {
     return {
