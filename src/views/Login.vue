@@ -1,37 +1,34 @@
     <template>
-        <section class="title">
-            <h1>Descripter.Ai</h1>
-            <p>Faça descrições performáticas de forma simples para seus produtos ou anúncios.</p>
-        </section>
+        <HomeTitle />
 
         <main id="login-form">
             <section class="container-form">
-                <div class="out-form">
-                    <span>Não possui conta?</span>
-                    <router-link to="/register">Registre-se</router-link>
-                </div>
                 <form class="form-home">
                     <input type="text" id="email" v-model="email" placeholder="E-mail">
-                    <input type="password" id="password" v-model="password" placeholder="Senha">
+                    <input v-show="showInput" type="password" id="password" v-model="password" placeholder="Senha">
                     <button type="button" @click="login">Login</button>
-                    <span v-if="message"> {{ message }} </span>
                 </form>
+                <span v-if="message"> {{ message }} </span>
             </section>
         </main>
     </template>
 
     <script>
+    import HomeTitle from '../components/default/HomeTitle.vue';
     import Cookie from '../services/cookie';
-    import { RouterLink } from 'vue-router';
     import { stateUsers } from '@/store/users';
     const Users = stateUsers()
 
     export default {
+        components: {
+            HomeTitle
+        },
         data() {
             return {
                 email: '',
                 password: '',
-                message: ''
+                message: '',
+                showInput: false
             }
         },
         methods: {
@@ -64,6 +61,5 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        height: 100vh;
     }
     </style>

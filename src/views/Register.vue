@@ -1,8 +1,4 @@
 <template>
-  <section class="title">
-    <h1>Descripter.Ai</h1>
-    <p>Faça descrições performáticas de forma simples para seus produtos ou anúncios.</p>
-  </section>
 
   <main id="login-form">
     <section class="container-form">
