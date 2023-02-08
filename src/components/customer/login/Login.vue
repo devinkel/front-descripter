@@ -1,5 +1,5 @@
 <template>
-    <Form v-if="showForm" :fields="formFields" @submit-form="handleSubmit" />
+    <Form formTitle="form-home login-form" :hiddenClass="hiddenClassEmail" :showPasswordField="showForm" :fields="formFields" :is-loading="isLoading" @submit-form="handleSubmit" />
     <span v-if="message "> {{ message }} </span>
 </template>
 
@@ -21,35 +21,44 @@ export default {
             showForm: true,
             email: '',
             message: '',
+            hiddenClassEmail: '',
+            isLoading: false
         }
     },
     methods: {
         async handleSubmit(formData) {
             if (this.showForm === true) {
-                this.axios.post('/users/checkemail', { email: formData.email })
+                this.isLoading = true
+                await this.axios.post('/users/checkemail', { email: formData.email })
                     .then(result => {
                         if (result.data.email) {
-                            this.showForm = false;
                             this.email = result.data.email;
+                            this.showForm = false;
+                            this.hiddenClassEmail = 'hidden'
                         }
+                        this.isLoading = false
                     })
                     .catch(e => {
-                        this.message = e?.response?.data?.message;
+                        this.message = e?.response?.data?.message ?? 'Usuário não encontrado';
+                        this.isLoading = false
                     })
             } else {
                 formData.email = this.email;
-                this.axios.post('/users/authenticate', formData)
+                await this.axios.post('/users/authenticate', formData)
                     .then(result => {
                         const { id, name, email, token } = result.data
                         Cookie.setToken(token);
     
                         Users.storeUser({ id, name, email, token })
                         this.$router.push({ name: 'home' })
+                        this.isLoading = false 
                     })
     
                     .catch(e => {
                         this.message = e?.response?.data?.message ?? ''
+                        this.isLoading = false 
                     })
+
             }
         },
 

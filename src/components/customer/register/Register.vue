@@ -1,5 +1,6 @@
 <template>
-    <Form :fields="formFields" @submit-form="handleSubmit" />
+    <Form formTitle="form-home register-form" :hiddenClass="''" :fields="formFields" :is-loading="isLoading" @submit-form="handleSubmit" />
+    <span v-if="message "> {{ message }} </span>
 </template>
 
 <script>
@@ -20,11 +21,13 @@ export default {
     methods: {
         async handleSubmit(formData) {
 
-            const response = await this.axios.post('/users', {
+            payload = {
                 name: this.name,
                 email: this.email,
                 password: this.password,
-            })
+            }
+
+            await this.axios.post('/users', payload)
             if (response.data.success) {
                 this.$store.commit('setAuthenticated', true)
             }

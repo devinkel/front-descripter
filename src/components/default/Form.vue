@@ -1,10 +1,13 @@
 <template>
   <section class="container-form">
-    <form class="form-home" @submit.prevent="submit">
-      <div v-for="field in fields" :key="field.name">
-        <input :type="field.type" :name="field.name" v-model="formData[field.name]" :placeholder="formData[field.placeholder]"/>
+    <form :class="formTitle" @submit.prevent="submit">
+      <div v-for="field in fields" :key="field.name" :class="`input-box-${field.name} ${hiddenClass}`">
+        <input v-if="!showPasswordField || field.name !== 'password'" :type="field.type" :name="field.name" v-model="formData[field.name]" :placeholder="field.placeholder"/>
       </div>
-      <button type="submit">Enviar</button>
+      <button type="submit" :disabled="isLoading">
+        <span v-if="!isLoading">Enviar</span>
+        <img v-if="isLoading" src="../../assets/images/loading-dots.svg" />
+      </button>
     </form>
   </section>
   </template>
@@ -12,7 +15,7 @@
   <script>
   export default {
     name: "Form",
-    props: ['fields'],
+    props: ['fields', 'showPasswordField', 'formTitle', 'hiddenClass', 'isLoading'],
     data() {
       return {
         formData: {},

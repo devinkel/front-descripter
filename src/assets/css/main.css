@@ -16,7 +16,7 @@
 
 .title p {
   font-size: 22px;
-  color: var(--mostarda);
+  color: var(--marrom);
 }
 
 .section-form {
@@ -27,17 +27,19 @@
 }
 
 h1 {
-  color: var(--marrom-escuro);
+  color: var(--turquesa);
   font-size: 110px;
   line-height: 1.4;
 }
 
 .container-form {
-  width: 70%;
+  width: 100%;
+  height: 100px;
   display: flex;
   flex-wrap: wrap;
   gap: 5px;
-  margin-top: 40px;
+  margin-top: 20px;
+  justify-content: center;
 }
 
 .container-form .form-home {
@@ -46,11 +48,45 @@ h1 {
   width: 100%;
 }
 
+.container-form .login-form {
+  width: 60%;
+}
+
+.container-form .register-form {
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.container-form .register-form div {
+  width: calc(100% / 3 - 10px);
+}
+
+.container-form .login-form .input-box-email {
+  width: 100%;
+  transition: .3s;
+}
+
 .container-form input {
   border: none;
   border-radius: 5px;
   padding: 0.8rem;
+  border: 1px solid var(--vt-c-divider-light-2);
   width: 100%;
+  transition: .3s;
+  font-family: 'Dior';
+  font-weight: 100;
+  color: var(--vt-c-text-light-1);
+}
+
+.container-form .input-box-email.hidden {
+  width: 0;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.container-form .input-box-password.hidden {
+  width: 100%;
+  transition: .3s;
 }
 
 .container-form input:focus {
@@ -58,18 +94,31 @@ h1 {
 }
 
 .container-form button {
-  background-color: var(--marrom-escuro);
+  background-color: var(--turquesa);
   color: #fff;
-  padding: 0.75rem 1.5rem;
+  width: 100px;
+  height: 42px;
   border-radius: 5px;
   border: none;
   font-weight: 600;
-  transition: background-color 0.2s ease;
+  transition: 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container-form button[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.container-form button img {
+  filter: invert(1);
 }
 
 .container-form button:hover {
   cursor: pointer;
-  background-color: var(--marrom-escuro-hover);
+  background-color: var(--turquesa-hover);
 }
 
 .out-form {
@@ -82,7 +131,7 @@ h1 {
 }
 
 .out-form a {
-  color: var(--mostarda);
+  color: var(--marrom);
   text-underline-offset: 3px;
   font-weight: 600;
 }

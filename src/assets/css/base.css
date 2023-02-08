@@ -25,9 +25,10 @@
   --vt-c-text-dark-2: rgba(235, 235, 235, 0.64);
 
   /* kelvin custom */
-  --marrom-escuro: #85144b;
-  --marrom-escuro-hover: #85144b6e;
-  --mostarda: #8CA126;
+  --turquesa: #008C8C;
+  --turquesa-hover: #008c8c9c;
+  --marrom: #5d2f33;
+  --alert: #FF6434;
 
 }
 
