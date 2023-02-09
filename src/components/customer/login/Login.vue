@@ -1,13 +1,12 @@
 <template>
-    <Form formTitle="form-home login-form" :hiddenClass="hiddenClassEmail" :showPasswordField="showForm" :fields="formFields" :is-loading="isLoading" @submit-form="handleSubmit" />
-    <span v-if="message "> {{ message }} </span>
+    <Form formTitle="form-home login-form" :hiddenClass="hiddenClassEmail" :showPasswordField="showForm" :fields="formFields" :is-loading="isLoading" @submit-form="handleSubmit"  :error-message="message"/>
 </template>
 
 <script>
 import Form from '../../default/Form.vue';
 import LoginForm from './create/loginForm'
 import Cookie from '../../../services/cookie';
-import { stateUsers } from '@/store/users';
+import { stateUsers } from '../../../store/users';
 const Users = stateUsers()
 
 export default {
@@ -28,6 +27,7 @@ export default {
     methods: {
         async handleSubmit(formData) {
             if (this.showForm === true) {
+                this.message = ''
                 this.isLoading = true
                 await this.axios.post('/users/checkemail', { email: formData.email })
                     .then(result => {
@@ -42,6 +42,7 @@ export default {
                         this.message = e?.response?.data?.message ?? 'Usuário não encontrado';
                         this.isLoading = false
                     })
+                    
             } else {
                 formData.email = this.email;
                 await this.axios.post('/users/authenticate', formData)
@@ -50,7 +51,7 @@ export default {
                         Cookie.setToken(token);
     
                         Users.storeUser({ id, name, email, token })
-                        this.$router.push({ name: 'home' })
+                        this.$router.push({ name: 'descripter' })
                         this.isLoading = false 
                     })
     

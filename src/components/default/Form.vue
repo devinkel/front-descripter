@@ -8,6 +8,7 @@
         <span v-if="!isLoading">Enviar</span>
         <img v-if="isLoading" src="../../assets/images/loading-dots.svg" />
       </button>
+      <span class="message-error" v-if="errorMessage">{{ errorMessage }}</span>
     </form>
   </section>
   </template>
@@ -15,7 +16,7 @@
   <script>
   export default {
     name: "Form",
-    props: ['fields', 'showPasswordField', 'formTitle', 'hiddenClass', 'isLoading'],
+    props: ['fields', 'showPasswordField', 'formTitle', 'hiddenClass', 'isLoading', 'errorMessage'],
     data() {
       return {
         formData: {},

@@ -6,6 +6,8 @@
 <script>
 import Form from '../../default/Form.vue';
 import RegisterForm from './create/registerForm'
+import { stateUsers } from '@/store/users';
+const Users = stateUsers()
 
 export default {
     name: "RegisterForm",
@@ -16,21 +18,22 @@ export default {
         return {
             formFields: RegisterForm.fields,
             message: '',
+            isLoading: false
         }   
     },
     methods: {
         async handleSubmit(formData) {
 
-            payload = {
-                name: this.name,
-                email: this.email,
-                password: this.password,
+            const payload = {
+                name: formData.name,
+                email: formData.email,
+                password: formData.password,
             }
 
-            await this.axios.post('/users', payload)
-            if (response.data.success) {
-                this.$store.commit('setAuthenticated', true)
-            }
+            await this.axios.post('/users', payload).then( result => {
+                console.log(result.data)
+            })
+           
         },
 
     },

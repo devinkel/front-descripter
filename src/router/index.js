@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
-import HomeView from '../views/Home.vue';
+import DescripterView from '../views/Descripter.vue';
 import Guard from '../services/middleware';
 
 const router = createRouter({
@@ -7,25 +7,15 @@ const router = createRouter({
   routes: [
     {
       path: "/",
-      beforeEnter: Guard.redirectNotAuthAuthenticated,
-      name: "home",
-      component: HomeView,
-    },
-    {
-      path: "/login",
       beforeEnter: Guard.redirectAuthAuthenticated,
-      name: "login",
-      component: () => import('../views/Login.vue'),
-    },
-    {
-      path: "/register",
-      name: "register",
-      component: () => import('../views/Register.vue'),
-    },
-    {
-      path: "/intro",
       name: "intro",
       component: () => import('../views/Intro.vue'),
+    },
+    {
+      path: "/descripter",
+      beforeEnter: Guard.redirectNotAuthAuthenticated,
+      name: "descripter",
+      component: DescripterView,
     },
   ],
 });

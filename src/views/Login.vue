@@ -16,7 +16,7 @@
     <script>
     import HomeTitle from '../components/default/HomeTitle.vue';
     import Cookie from '../services/cookie';
-    import { stateUsers } from '@/store/users';
+    import { stateUsers } from '../store/users';
     const Users = stateUsers()
 
     export default {

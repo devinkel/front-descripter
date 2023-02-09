@@ -13,6 +13,9 @@ export const stateUsers = defineStore('users', {
     getters: {
         getUser() {
             return this.userState
+        },
+        getUserName() {
+            return this.userState.name
         }
     },
 

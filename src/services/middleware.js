@@ -8,7 +8,7 @@ export default {
     async redirectNotAuthAuthenticated(to, from, next) {
         const token = Cookie.getToken()
 
-        if (!token) { next({ name: 'login' }) }
+        if (!token) { next({ name: 'intro' }) }
 
         if (token) {
             await axios.get('/users/me', {
@@ -25,7 +25,7 @@ export default {
                 })
                 .catch(e => {
                     Cookie.deleteToken()
-                    next({ name: 'login' })
+                    next({ name: 'intro' })
                 })
         }
 
@@ -36,7 +36,7 @@ export default {
     redirectAuthAuthenticated(to, from, next) {
         const token = Cookie.getToken()
 
-        if (token) { next({ name: 'home' }) }
+        if (token) { next({ name: 'descripter' }) }
 
         next();
     }
