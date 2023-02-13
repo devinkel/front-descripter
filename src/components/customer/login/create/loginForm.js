@@ -1,4 +1,3 @@
-import * as Yup from 'yup';
 export default {
     fields: [
         {
@@ -7,7 +6,7 @@ export default {
             type: 'email',
             placeholder: 'Digite seu e-mail',
             value: '',
-            rules: Yup.string().email('must be a valid email').required()
+            rules: 'required|email'
         },
         {
             name: 'password',
@@ -15,6 +14,7 @@ export default {
             type: 'password',
             placeholder: 'Digite sua senha',
             value: '',
+            rules: 'required|min:6'
         }
     ]
 }

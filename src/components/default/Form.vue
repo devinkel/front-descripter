@@ -1,32 +1,44 @@
 <template>
   <section class="container-form">
-    <form :class="formTitle" @submit.prevent="submit">
+    <Form ref="form" @submit.prevent="submit">
       <div v-for="field in fields" :key="field.name" :class="`input-box-${field.name} ${hiddenClass}`">
-        <input v-if="!showPasswordField || field.name !== 'password'" :type="field.type" :name="field.name" v-model="formData[field.name]" :placeholder="field.placeholder"/>
+        <Field :name="field.name" v-if="!showPasswordField || field.name !== 'password'" :rules="field.rules">
+          <input :type="field.type" v-model="formData[field.name]" :placeholder="field.placeholder"/>
+        </Field>
+        <ErrorMessage :name="field.name" />
       </div>
       <button type="submit" :disabled="isLoading">
         <span v-if="!isLoading">Enviar</span>
         <img v-if="isLoading" src="../../assets/images/loading-dots.svg" />
       </button>
       <span class="message-error" v-if="errorMessage">{{ errorMessage }}</span>
-    </form>
+    </Form>
   </section>
-  </template>
-  
-  <script>
-  export default {
-    name: "Form",
-    props: ['fields', 'showPasswordField', 'formTitle', 'hiddenClass', 'isLoading', 'errorMessage'],
-    data() {
-      return {
-        formData: {},
+</template>
+
+<script>
+import { Form, Field, ErrorMessage } from 'vee-validate';
+
+export default {
+  components: {
+    Form,
+    Field,
+    ErrorMessage,
+  },
+  props: ['fields', 'showPasswordField', 'formTitle', 'hiddenClass', 'isLoading', 'errorMessage'],
+  data() {
+    return {
+      formData: {},
+    }
+  },
+  methods: {
+    async submit() {
+      const { valid } = await this.$refs.form.validate();
+
+      if (valid) {
+        this.$emit('submit-form', this.formData)
       }
     },
-    methods: {
-      submit() {
-        this.$emit('submit-form', this.formData)
-      },
-    },
-  }
-  </script>
-  
+  },
+}
+</script>
