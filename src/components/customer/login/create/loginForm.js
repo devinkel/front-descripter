@@ -6,7 +6,7 @@ export default {
             type: 'email',
             placeholder: 'Digite seu e-mail',
             value: '',
-            rules: 'required|email'
+            rules: 'email'
         },
         {
             name: 'password',
@@ -14,7 +14,7 @@ export default {
             type: 'password',
             placeholder: 'Digite sua senha',
             value: '',
-            rules: 'required|min:6'
+            rules: 'required'
         }
     ]
 }

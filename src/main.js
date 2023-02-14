@@ -7,6 +7,7 @@ import router from "./router";
 import "./assets/css/main.css";
 
 import axiosInstance from "./plugins/axios";
+import "./plugins/vee-validate";
 
 const pinia = createPinia()
 const app = createApp(App);
